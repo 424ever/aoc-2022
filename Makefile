@@ -13,8 +13,8 @@ OBJ    += $(SRCDIR)/runner.o
 
 all: $(PROG)
 
-clean: $(PROG) $(OBJ)
-	@$(RM) -f $^
+clean:
+	@$(RM) -f $(PROG) $(OBJ)
 
 $(PROG): $(OBJ)
 	@printf "%b" " \033[0;34mLD\t\033[0;35m$@\033[m\n"
