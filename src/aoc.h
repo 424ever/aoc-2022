@@ -4,7 +4,7 @@
 #ifndef _AOC_H_
 #define _AOC_H_
 
-typedef void (*sol_func)(FILE*, FILE*);
+typedef void (*sol_func)(FILE *in_f, FILE *out_f, FILE *debug_out);
 
 struct aoc_sol
 {

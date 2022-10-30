@@ -24,10 +24,12 @@ int main (argc, argv)
 int   argc;
 char *argv[];
 {
+	FILE  *debug_out_f;
 	FILE  *in_f;
 	FILE  *out_f;
 	FILE  *test_in_f;
 	bool   found_sol;
+	bool   list_mode;
 	bool   test_mode;
 	char   in_fname[PATH_MAX];
 	char   test_in_fname[PATH_MAX];
@@ -35,12 +37,22 @@ char *argv[];
 	int    option;
 	size_t i;
 
+	debug_out_f = NULL;
+	found_sol = false;
+	list_mode = false;
 	test_in_f = NULL;
+	test_mode = false;
 
-	while ((option = getopt (argc, argv, "t")) not_eq -1)
+	while ((option = getopt (argc, argv, "dlt")) not_eq -1)
 	{
 		switch (option)
 		{
+			case 'd':
+				debug_out_f = stderr;
+				break;
+			case 'l':
+				list_mode = true;
+				break;
 			case 't':
 				test_mode = true;
 				break;
@@ -51,11 +63,28 @@ char *argv[];
 		}
 	}
 
+	if (list_mode)
+	{
+		for (i = 0; i < n_reg_sols; ++i)
+			fprintf (stdout, "%s\n", sols[i].name);
+		return EXIT_SUCCESS;
+	}
+
 	if (optind == argc)
 	{
-		fprintf (stderr, "Usage: %s [-t] <problem>\n",
+		fprintf (stderr, "Usage: %s [-dlt] problem\n",
 				argv[0]);
 		return EXIT_FAILURE;
+	}
+	
+	if (not debug_out_f)
+	{
+		debug_out_f = fopen ("/dev/null", "w");
+		if (not debug_out_f)
+		{
+			perror ("/dev/null");
+			return EXIT_FAILURE;
+		}
 	}
 
 	problem = argv[optind];
@@ -91,7 +120,7 @@ char *argv[];
 	{
 		if (strcmp (sols[i].name, problem) == 0)
 		{
-			sols[i].sol (in_f, out_f);
+			sols[i].sol (in_f, out_f, debug_out_f);
 			found_sol = true;
 			fflush (out_f);
 			break;
