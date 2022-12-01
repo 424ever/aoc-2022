@@ -9,12 +9,15 @@ SOLOBJS = $(patsubst %.c, %.o, $(SOLSRCS))
 OBJ     = $(SOLOBJS)
 OBJ    += $(SRCDIR)/runner.o
 
-.PHONY: all clean
+.PHONY: all clean check
 
 all: $(PROG)
 
 clean:
 	@$(RM) -f $(PROG) $(OBJ)
+
+check: $(PROG)
+	@./$(PROG) -l | xargs -L1 ./$(PROG) -t
 
 $(PROG): $(OBJ)
 	@printf "%b" " \033[0;34mLD\t\033[0;35m$@\033[m\n"
