@@ -35,13 +35,15 @@ char *argv[];
 	char   test_in_fname[PATH_MAX];
 	char  *problem;
 	int    option;
+	int    ret;
 	size_t i;
 
 	debug_out_f = NULL;
-	found_sol = false;
-	list_mode = false;
-	test_in_f = NULL;
-	test_mode = false;
+	found_sol   = false;
+	list_mode   = false;
+	ret         = EXIT_SUCCESS;
+	test_in_f   = NULL;
+	test_mode   = false;
 
 	while ((option = getopt (argc, argv, "dlt")) not_eq -1)
 	{
@@ -137,11 +139,14 @@ char *argv[];
 	if (test_mode)
 	{
 		if (strcmp (output, expected_output) not_eq 0)
+		{
 			printf ("Solution didn't pass test case\n");
+			ret = EXIT_FAILURE;
+		}
 		else
 			printf ("Solution passed test case! YAY!\n");
-		printf ("E: '%s'\n", expected_output);
-		printf ("G: '%s'\n", output);
+		printf ("E:\n'%s'\n", expected_output);
+		printf ("G:\n'%s'\n", output);
 	} else
 	{
 		printf ("%s\n", output);
@@ -153,7 +158,7 @@ char *argv[];
 		perror ("fclose");
 	fclose (out_f);
 
-	return EXIT_SUCCESS;
+	return ret;
 }
 
 bool register_sol (sol)
