@@ -133,6 +133,7 @@ char *argv[];
 		return EXIT_FAILURE;
 	}
 
+	rtrim (output);
 	if (test_mode)
 	{
 		if (strcmp (output, expected_output) not_eq 0)
