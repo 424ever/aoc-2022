@@ -3,3 +3,21 @@ aoc-2022
 
 Solutions to Advent Of Code 2022 problems.
 
+This repo hosts my solutions for Advent Of Code 2022 (https://adventofcode.com/2022)
+
+Dependencies
+------------
+
+  - make
+  - a C compiler
+
+Building
+--------
+
+ $ make
+
+Running tests
+-------------
+
+ $ make check
+
