@@ -2,7 +2,6 @@
  * example -- Example problem
  */
 #include <iso646.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
