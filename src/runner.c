@@ -140,13 +140,11 @@ char *argv[];
 	{
 		if (strcmp (output, expected_output) not_eq 0)
 		{
-			printf ("Solution didn't pass test case\n");
+			printf ("Solution %s didn't pass test case\n", problem);
+			printf ("E:\n'%s'\n", expected_output);
+			printf ("G:\n'%s'\n", output);
 			ret = EXIT_FAILURE;
 		}
-		else
-			printf ("Solution passed test case! YAY!\n");
-		printf ("E:\n'%s'\n", expected_output);
-		printf ("G:\n'%s'\n", output);
 	} else
 	{
 		printf ("%s\n", output);
