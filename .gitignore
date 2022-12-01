@@ -1,2 +1,4 @@
 aoc-2022
 **/*.o
+inputs/*
+!inputs/*.test
