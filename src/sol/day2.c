@@ -1,5 +1,5 @@
 /*
- * Day 2: Rock Paper Scissors
+ * Day 2 -- Rock Paper Scissors
  */
 #include <iso646.h>
 #include <stdio.h>
