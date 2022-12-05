@@ -66,5 +66,7 @@ FILE *debug_out;
 	}
 
 	fprintf (out_f, "%d\n%d\n", res1_sum, res2_sum);
+
+	free (line);
 }
 

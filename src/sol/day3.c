@@ -94,6 +94,10 @@ FILE *debug_out;
 		prio_sum += prio;
 	}
 	fprintf (out_f, "%d\n", prio_sum);
+
+	free (line);
+	for (i = 0; i < 3; ++i)
+		free (lines[i]);
 }
 
 bool char_in (str, c)
