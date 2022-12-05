@@ -18,7 +18,6 @@ static char           output[OUTPUT_SIZE];
 static char           expected_output[OUTPUT_SIZE];
 
 bool  register_sol (struct aoc_sol);
-void *rtrim (char*);
 
 int main (argc, argv)
 int   argc;
@@ -178,7 +177,7 @@ struct aoc_sol sol;
 	return true;
 }
 
-void *rtrim (s)
+char *rtrim (s)
 char *s;
 {
 	char *back;

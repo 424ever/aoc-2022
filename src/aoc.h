@@ -13,6 +13,7 @@ struct aoc_sol
 };
 
 extern bool register_sol (struct aoc_sol);
+char *rtrim (char*);
 
 #endif /* _AOC_H_ */
 
