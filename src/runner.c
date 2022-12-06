@@ -153,6 +153,8 @@ char *argv[];
 		perror ("fclose");
 	if (test_in_f and fclose (test_in_f) not_eq 0)
 		perror ("fclose");
+	if (debug_out_f not_eq stderr and fclose (debug_out_f) not_eq 0)
+		perror ("fclose");
 	fclose (out_f);
 
 	return ret;
