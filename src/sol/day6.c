@@ -2,13 +2,15 @@
  * Day 6 -- Tuning Trouble
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "aoc.h"
 
 static void day6_sol_func (FILE*, FILE*, FILE*);
-static bool has_dups (char*, size_t);
-static void push_back (char*, size_t, char);
+static int find_first_unique_seq (FILE*, int);
+static bool has_dups (char*, int);
+static void push_back (char*, int, char);
 
 static struct aoc_sol day6_sol = {
 	.name = "day6",
@@ -26,53 +28,46 @@ FILE *in_f;
 FILE *out_f;
 FILE *debug_out;
 {
-	char buf_1[4];
-	char buf_2[14];
-	char c;
-	int  n;
+	(void) debug_out;
 
-	n = 0;
-
-	while ((c = fgetc (in_f)) != EOF)
-	{
-		++n;
-		fprintf (debug_out, "buf: [ %d %d %d %d ] c: %d %c\n", buf_1[0], buf_1[1], buf_1[2], buf_1[3], c, c);
-		push_back (buf_1, 4, c);
-
-		if (n <= 4)
-			continue;
-
-		if (!has_dups (buf_1, 4))
-		{
-			fprintf (out_f, "%d\n", n);
-			break;
-		}
-	}
+	fprintf (out_f, "%d\n", find_first_unique_seq (in_f, 4));
 	fseek (in_f, 0, SEEK_SET);
+	fprintf (out_f, "%d\n", find_first_unique_seq (in_f, 14));
+}
 
-	n = 0;
-	while ((c = fgetc (in_f)) != EOF)
+int find_first_unique_seq (f, n)
+FILE *f;
+int   n;
+{
+	int   i;
+	char  c;
+	char *buf;
+
+	i   = 0;
+	buf = calloc (n, 1);
+
+	while ((c = fgetc (f)) != EOF)
 	{
-		++n;
-		push_back (buf_2, 14, c);
-
-		if (n <= 14)
+		++i;
+		push_back (buf, n, c);
+		
+		if (i <= n)
 			continue;
 
-		if (!has_dups (buf_2, 14))
-		{
-			fprintf (out_f, "%d\n", n);
-			break;
-		}
+		if (!has_dups (buf, n))
+			goto exit;
 	}
 
+exit:
+	free (buf);
+	return i;
 }
 
 bool has_dups (buf, n)
-char  *buf;
-size_t n;
+char *buf;
+int   n;
 {
-	size_t i, j;
+	int i, j;
 
 	for (i = 0; i < n; ++i)
 	{
@@ -86,9 +81,9 @@ size_t n;
 }
 
 void push_back (buf, n, c)
-char  *buf;
-size_t n;
-char   c;
+char *buf;
+int   n;
+char  c;
 {
 	memmove (buf, buf + 1, n - 1);
 	buf[n - 1] = c;
