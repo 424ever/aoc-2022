@@ -100,9 +100,7 @@ FILE *debug_out;
 		free (lines[i]);
 }
 
-bool char_in (str, c)
-char *str;
-char  c;
+bool char_in (char *str, char c)
 {
 	size_t i;
 

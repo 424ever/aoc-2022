@@ -80,10 +80,7 @@ int   n;
 	return false;
 }
 
-void push_back (buf, n, c)
-char *buf;
-int   n;
-char  c;
+void push_back (char *buf, int n, char c)
 {
 	memmove (buf, buf + 1, n - 1);
 	buf[n - 1] = c;

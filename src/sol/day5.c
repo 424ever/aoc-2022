@@ -162,9 +162,7 @@ struct proc   p;
 	free (buf);
 }
 
-void stack_add_bottom (s, c)
-struct stack *s;
-char          c;
+void stack_add_bottom (struct stack *s, char c)
 {
 	++s->count;
 	if (s->count >= MAX_STACK)
@@ -186,9 +184,7 @@ struct stack *s;
 	return s->crates[0];
 }
 
-void stack_push (s, c)
-struct stack *s;
-char          c;
+void stack_push (struct stack *s, char c)
 {
 	++s->count;
 	if (s->count >= MAX_STACK)
