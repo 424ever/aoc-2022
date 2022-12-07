@@ -1,0 +1,6 @@
+-Wall
+-Wextra
+-Werror
+-Isrc/
+-g
+
