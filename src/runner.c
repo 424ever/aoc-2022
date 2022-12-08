@@ -39,7 +39,9 @@ char *argv[];
 
 	debug_out_f = NULL;
 	found_sol   = false;
+	in_f        = NULL;
 	list_mode   = false;
+	out_f       = NULL;
 	ret         = EXIT_SUCCESS;
 	test_in_f   = NULL;
 	test_mode   = false;
@@ -75,7 +77,8 @@ char *argv[];
 	{
 		fprintf (stderr, "Usage: %s [-dlt] problem\n",
 				argv[0]);
-		return EXIT_FAILURE;
+		ret = EXIT_FAILURE;
+		goto out;
 	}
 	
 	if (not debug_out_f)
@@ -84,7 +87,8 @@ char *argv[];
 		if (not debug_out_f)
 		{
 			perror ("/dev/null");
-			return EXIT_FAILURE;
+			ret = EXIT_FAILURE;
+			goto out;
 		}
 	}
 
@@ -98,9 +102,18 @@ char *argv[];
 		if (not (test_in_f = fopen (test_in_fname, "r")))
 		{
 			perror (test_in_fname);
-			return EXIT_FAILURE;
+			ret = EXIT_FAILURE;
+			goto out;
 		}
-		fread (expected_output, OUTPUT_SIZE, 1, test_in_f);
+		if (fread (expected_output, OUTPUT_SIZE, 1, test_in_f) == 0)
+		{
+			if (ferror(test_in_f))
+			{
+				perror (test_in_fname);
+				ret = EXIT_FAILURE;
+				goto out;
+			}
+		}
 		rtrim (expected_output);
 	} else
 		snprintf (in_fname, PATH_MAX, "inputs/%s", problem);
@@ -108,13 +121,15 @@ char *argv[];
 	if (not (in_f = fopen (in_fname, "r")))
 	{
 		perror (in_fname);
-		return EXIT_FAILURE;
+		ret = EXIT_FAILURE;
+		goto out;
 	}
 
 	if (not (out_f = fmemopen (output, OUTPUT_SIZE, "w")))
 	{
 		perror ("fmemopen");
-		return EXIT_FAILURE;
+		ret = EXIT_FAILURE;
+		goto out;
 	}
 	
 	for (i = 0; i < n_reg_sols; ++i)
@@ -131,7 +146,8 @@ char *argv[];
 	if (not found_sol)
 	{
 		fprintf (stderr, "No solution found!\n");
-		return EXIT_FAILURE;
+		ret = EXIT_FAILURE;
+		goto out;
 	}
 
 	rtrim (output);
@@ -143,19 +159,22 @@ char *argv[];
 			printf ("E:\n'%s'\n", expected_output);
 			printf ("G:\n'%s'\n", output);
 			ret = EXIT_FAILURE;
+			goto out;
 		}
 	} else
 	{
 		printf ("%s\n", output);
 	}
 
-	if (fclose (in_f) not_eq 0)
+out:
+	if (in_f and fclose (in_f) not_eq 0)
 		perror ("fclose");
 	if (test_in_f and fclose (test_in_f) not_eq 0)
 		perror ("fclose");
 	if (debug_out_f not_eq stderr and fclose (debug_out_f) not_eq 0)
 		perror ("fclose");
-	fclose (out_f);
+	if (out_f and fclose (out_f) not_eq 0)
+		perror ("fclose");
 
 	return ret;
 }
