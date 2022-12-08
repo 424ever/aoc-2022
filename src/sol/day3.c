@@ -72,9 +72,12 @@ FILE *debug_out;
 
 	for (;;)
 	{
-		getline (lines, &nread, in_f);
-		getline (lines + 1, &nread, in_f);
-		getline (lines + 2, &nread, in_f);
+		if (getline (lines, &nread, in_f) < 0)
+			break;
+		if (getline (lines + 1, &nread, in_f) < 0)
+			break;
+		if (getline (lines + 2, &nread, in_f) < 0)
+			break;
 
 		if (feof (in_f))
 			break;
