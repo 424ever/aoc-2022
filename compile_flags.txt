@@ -2,5 +2,6 @@
 -Wextra
 -Werror
 -Isrc/
--g
+-pedantic-errors
+-Ofast
 

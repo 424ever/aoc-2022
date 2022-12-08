@@ -13,7 +13,7 @@
 struct dirent
 {
 	bool            dir;
-	char            name[MAX_NAME_LEN];
+	char            name[MAX_NAME_LEN + 1];
 	size_t          size;
 	struct dirent  *parent;
 	size_t          nchild;
@@ -45,7 +45,7 @@ void __attribute__((constructor)) day7_init (void)
 void day7_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char           cmd[3];
-	char           fname[MAX_NAME_LEN];
+	char           fname[MAX_NAME_LEN + 1];
 	char          *line;
 	size_t         nread;
 	size_t         part1_sum;
@@ -98,7 +98,7 @@ void day7_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 			else
 			{
 				child = dirent_create (false, "", cwd);
-				sscanf (line, "%ld %s\n", &child->size, child->name);
+				sscanf (line, "%lu %s\n", &child->size, child->name);
 			}
 		}
 	}

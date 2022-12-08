@@ -99,7 +99,7 @@ FILE *debug_out;
 	while (getline (&line, &nread, in_f) != -1)
 	{
 		procs = reallocarray (procs, nprocs + 1, sizeof (struct proc));
-		sscanf (line, "move %d from %d to %d\n", &procs[nprocs].count,
+		sscanf (line, "move %u from %u to %u\n", &procs[nprocs].count,
 							 &procs[nprocs].from,
 							 &procs[nprocs].to);
 		--procs[nprocs].from;

@@ -1,7 +1,7 @@
 SOLDIR  = src/sol
 SRCDIR  = src
 PROG    = aoc-2022
-CFLAGS  = -Wall -Wextra -Werror -I $(SRCDIR) -g
+CFLAGS  = -Wall -Wextra -Werror -I$(SRCDIR) -pedantic-errors -Ofast
 
 SOLSRCS = $(wildcard $(SOLDIR)/*.c)
 SOLOBJS = $(patsubst %.c, %.o, $(SOLSRCS))

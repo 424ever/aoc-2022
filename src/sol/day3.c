@@ -36,9 +36,10 @@ FILE *debug_out;
 	size_t  len;
 	size_t  nread;
 
-	line     = NULL;
-	nread    = 0;
-	prio_sum = 0;
+	common_char = '\0';
+	line        = NULL;
+	nread       = 0;
+	prio_sum    = 0;
 
 	memset (lines, 0, sizeof (lines));
 
