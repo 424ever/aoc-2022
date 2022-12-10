@@ -28,7 +28,7 @@ static struct aoc_sol day9_sol = {
 void __attribute__((constructor)) day9_init (void)
 {
 	if (!register_sol (day9_sol))
-		fprintf (stderr, "day9 load failed.");
+		fprintf (stderr, "day9 load failed.\n");
 }
 
 void day9_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
