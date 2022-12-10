@@ -43,7 +43,7 @@ void day10_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 		rtrim (line);
 		++cycle;
 		crtx = crtpos % 40;
-		crt[crtpos++] = abs (crtx - x) <= 1 ? '#' : ' ';
+		crt[crtpos++] = abs (crtx - x) <= 1 ? '#' : '.';
 
 		if ((cycle - 20) % 40 == 0)
 		{
@@ -55,7 +55,7 @@ void day10_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 		{
 			++cycle;
 			crtx = crtpos % 40;
-			crt[crtpos++] = abs (crtx - x) <= 1 ? '#' : ' ';
+			crt[crtpos++] = abs (crtx - x) <= 1 ? '#' : '.';
 
 			if ((cycle - 20) % 40 == 0)
 			{
