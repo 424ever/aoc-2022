@@ -1,7 +1,6 @@
 /*
  * Day 11 -- Monkey in the Middle
  */
-#include <alloca.h>
 #include <ctype.h>
 #include <inttypes.h>
 #include <stdbool.h>
@@ -73,8 +72,8 @@ void day11_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 	monkeys2 = malloc (nmonkeys * sizeof (*monkeys2));
 	memcpy (monkeys2, monkeys1, nmonkeys * sizeof (*monkeys2));
 
-	throwcounts1 = alloca (nmonkeys * sizeof (*throwcounts1));
-	throwcounts2 = alloca (nmonkeys * sizeof (*throwcounts2));
+	throwcounts1 = malloc (nmonkeys * sizeof (*throwcounts1));
+	throwcounts2 = malloc (nmonkeys * sizeof (*throwcounts2));
 	memset (throwcounts1, 0, nmonkeys * sizeof (*throwcounts1));
 	memset (throwcounts2, 0, nmonkeys * sizeof (*throwcounts2));
 
@@ -107,6 +106,8 @@ void day11_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 	fprintf (out_f, "%ld\n", throwcounts2[nmonkeys - 1] * throwcounts2[nmonkeys - 2]);
 	free (monkeys1);
 	free (monkeys2);
+	free (throwcounts1);
+	free (throwcounts2);
 }
 
 void parse_init_state (FILE *f, struct monkey **mptr, int *nptr)
