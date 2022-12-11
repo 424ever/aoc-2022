@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include <iso646.h>
-#include <linux/limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +9,7 @@
 #include "aoc.h"
 
 #define MAX_SOLS 99
+#define MAX_FNAME 1024
 #define OUTPUT_SIZE 1024 /* Allow for 1k of solution output */
 
 static struct aoc_sol sols[MAX_SOLS];
@@ -30,8 +30,8 @@ char *argv[];
 	bool   found_sol;
 	bool   list_mode;
 	bool   test_mode;
-	char   in_fname[PATH_MAX];
-	char   test_in_fname[PATH_MAX];
+	char   in_fname[MAX_FNAME];
+	char   test_in_fname[MAX_FNAME];
 	char  *problem;
 	int    option;
 	int    ret;
@@ -96,8 +96,8 @@ char *argv[];
 
 	if (test_mode)
 	{
-		snprintf (in_fname, PATH_MAX, "inputs/%s.test", problem);
-		snprintf (test_in_fname, PATH_MAX, "test-outputs/%s", problem);
+		snprintf (in_fname, MAX_FNAME, "inputs/%s.test", problem);
+		snprintf (test_in_fname, MAX_FNAME, "test-outputs/%s", problem);
 
 		if (not (test_in_f = fopen (test_in_fname, "r")))
 		{
@@ -116,7 +116,7 @@ char *argv[];
 		}
 		rtrim (expected_output);
 	} else
-		snprintf (in_fname, PATH_MAX, "inputs/%s", problem);
+		snprintf (in_fname, MAX_FNAME, "inputs/%s", problem);
 
 	if (not (in_f = fopen (in_fname, "r")))
 	{
