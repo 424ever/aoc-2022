@@ -59,12 +59,15 @@ void day13_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 		tmp = line;
 		packets[npackets++] = parse_packet (&tmp);
 
-		(void) getline (&line, &nread, in_f);
+		if (getline (&line, &nread, in_f) == -1)
+			break;
+
 		rtrim (line);
 		tmp = line;
 		packets[npackets++] = parse_packet (&tmp);
 		
-		(void) getline (&line, &nread, in_f);
+		if (getline (&line, &nread, in_f) == -1)
+			break;
 	}
 
 	for (i = 0; i * 2 < npackets; ++i)
