@@ -17,7 +17,8 @@ clean:
 	@$(RM) -f $(PROG) $(OBJ)
 
 check: $(PROG)
-	@./$(PROG) -l | xargs -L1 ./$(PROG) -t
+	@printf "%b" " \033[0;34mCHK\t\033[0;35m$(PROG)\033[m\n"
+	@time ./$(PROG) -l | xargs -L1 ./$(PROG) -t
 
 $(PROG): $(OBJ)
 	@printf "%b" " \033[0;34mLD\t\033[0;35m$@\033[m\n"
