@@ -12,6 +12,7 @@
 #define MAX_FNAME 1024
 #define OUTPUT_SIZE 1024 /* Allow for 1k of solution output */
 
+static bool           test_mode;
 static struct aoc_sol sols[MAX_SOLS];
 static size_t         n_reg_sols = 0;
 static char           output[OUTPUT_SIZE];
@@ -29,7 +30,6 @@ char *argv[];
 	FILE  *test_in_f;
 	bool   found_sol;
 	bool   list_mode;
-	bool   test_mode;
 	char   in_fname[MAX_FNAME];
 	char   test_in_fname[MAX_FNAME];
 	char  *problem;
@@ -207,5 +207,10 @@ char *s;
 	while (isspace (*--back));
 	*(back + 1) = '\0';
 	return s;
+}
+
+bool is_test_mode (void)
+{
+	return test_mode;
 }
 
