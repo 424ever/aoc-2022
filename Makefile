@@ -20,6 +20,10 @@ check: $(PROG)
 	@printf "%b" " \033[0;34mCHK\t\033[0;35m$(PROG)\033[m\n"
 	@time ./$(PROG) -l | xargs -L1 ./$(PROG) -t
 
+memcheck: $(PROG)
+	@printf "%b" " \033[0;34mMCHK\t\033[0;35m$(PROG)\033[m\n"
+	@time ./$(PROG) -l | xargs -L1 valgrind -q ./$(PROG) -t
+
 $(PROG): $(OBJ)
 	@printf "%b" " \033[0;34mLD\t\033[0;35m$@\033[m\n"
 	@$(CC) -o $@ $^ $(CFLAGS)

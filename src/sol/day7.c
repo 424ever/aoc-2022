@@ -2,6 +2,7 @@
  * Day 7 -- No Space Left On Device
  */
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,6 +58,7 @@ void day7_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 	line      = NULL;
 	nread     = 0;
 	part1_sum = 0;
+	part2     = UINT64_MAX;
 
 	root = dirent_create (true, "(root)", NULL);
 	cwd  = root;
