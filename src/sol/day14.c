@@ -4,33 +4,30 @@
 #include <search.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_X 1000
 #define MAX_Y 1000
 
 #include "aoc.h"
 
-static void day14_sol_func (FILE*, FILE*, FILE*);
-static int max (int, int);
-static int min (int, int);
-static void print_field (FILE*, int, int, int, int);
+static void day14_sol_func(FILE *, FILE *, FILE *);
+static int  max(int, int);
+static int  min(int, int);
+static void print_field(FILE *, int, int, int, int);
 
-static struct aoc_sol day14_sol = {
-	.name = "day14",
-	.sol  = &day14_sol_func
-};
+static struct aoc_sol day14_sol = {.name = "day14", .sol = &day14_sol_func};
 
 static char field[MAX_X][MAX_Y];
 
-void __attribute__((constructor)) day14_init (void)
+void __attribute__((constructor)) day14_init(void)
 {
-	if (!register_sol (day14_sol))
-		fprintf (stderr, "day14 load failed.\n");
+	if (!register_sol(day14_sol))
+		fprintf(stderr, "day14 load failed.\n");
 }
 
-void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
+void day14_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char  *line;
 	char  *tmp;
@@ -53,11 +50,11 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 			field[i][j] = '.';
 	}
 
-	while (getline (&line, &nread, in_f) != -1)
+	while (getline(&line, &nread, in_f) != -1)
 	{
 		prevx = -1;
 		prevy = -1;
-		rtrim (line);
+		rtrim(line);
 		tmp = line;
 
 		while (tmp)
@@ -68,29 +65,33 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 			{
 				if (y == prevy)
 				{
-					for (i = min(x, prevx); i <= max(x, prevx); ++i)
+					for (i = min(x, prevx);
+					     i <= max(x, prevx); ++i)
 						field[i][y] = '#';
-				} else if (x == prevx)
+				}
+				else if (x == prevx)
 				{
-					for (i = min(y, prevy); i <= max(y, prevy); ++i)
+					for (i = min(y, prevy);
+					     i <= max(y, prevy); ++i)
 						field[x][i] = '#';
-				} else
+				}
+				else
 					abort();
 			}
 
 			prevx = x;
 			prevy = y;
-			maxy = max(y, maxy);
+			maxy  = max(y, maxy);
 
-			tmp = strstr (tmp, "-> ");
+			tmp = strstr(tmp, "-> ");
 
 			if (tmp)
 				tmp += 3;
 		}
 	}
-	free (line);
+	free(line);
 
-	print_field (debug_out, 490, 20, 0, 15);
+	print_field(debug_out, 490, 20, 0, 15);
 
 	x = 500;
 	y = 0;
@@ -104,21 +105,22 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 		{
 			--x;
 			++y;
-		} else if (x < (MAX_X - 1) && field[x + 1][y + 1] == '.')
+		}
+		else if (x < (MAX_X - 1) && field[x + 1][y + 1] == '.')
 		{
 			++x;
 			++y;
-		} else 
+		}
+		else
 		{
 			field[x][y] = 'o';
 			++drops;
 			x = 500;
 			y = 0;
 		}
-
 	}
 
-	fprintf (out_f, "%ld\n", drops);
+	fprintf(out_f, "%ld\n", drops);
 	for (i = 0; i < MAX_X; ++i)
 	{
 		for (j = 0; j < MAX_Y; ++j)
@@ -132,8 +134,8 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 	}
 
 	drops = 0;
-	x = 500;
-	y = 0;
+	x     = 500;
+	y     = 0;
 	for (;;)
 	{
 		if (field[x][y + 1] == '.')
@@ -142,11 +144,13 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 		{
 			--x;
 			++y;
-		} else if (x < (MAX_X - 1) && field[x + 1][y + 1] == '.')
+		}
+		else if (x < (MAX_X - 1) && field[x + 1][y + 1] == '.')
 		{
 			++x;
 			++y;
-		} else 
+		}
+		else
 		{
 			if (x == 500 && y == 0)
 				break;
@@ -155,37 +159,35 @@ void day14_sol_func (FILE *in_f, FILE *out_f, FILE *debug_out)
 			x = 500;
 			y = 0;
 		}
-
 	}
 
-	print_field (debug_out, 494, 10, 0, 10);
+	print_field(debug_out, 494, 10, 0, 10);
 
-	fprintf (out_f, "%ld\n", drops + 1);
+	fprintf(out_f, "%ld\n", drops + 1);
 }
 
-void print_field (FILE *f, int startx, int nx, int starty, int ny)
+void print_field(FILE *f, int startx, int nx, int starty, int ny)
 {
 	int i, j;
 
-	fprintf (f, "    %3d\n", startx);
+	fprintf(f, "    %3d\n", startx);
 	for (i = 0; i < ny; ++i)
 	{
-		fprintf (f, "%-3d ", starty + i);
+		fprintf(f, "%-3d ", starty + i);
 		for (j = 0; j < nx; ++j)
 		{
-			fputc (field[j + startx][i + starty], f);
+			fputc(field[j + startx][i + starty], f);
 		}
-		fputc ('\n', f);
+		fputc('\n', f);
 	}
 }
 
-int min (int a, int b)
+int min(int a, int b)
 {
 	return a < b ? a : b;
 }
 
-int max (int a, int b)
+int max(int a, int b)
 {
 	return a > b ? a : b;
 }
-
