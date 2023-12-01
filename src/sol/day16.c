@@ -84,6 +84,8 @@ void day16_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 	fprintf(out_f, "%d\n",
 		max_pressure_release(valves, nvalves, start, start, 26, 26,
 				     open, 1));
+
+	free(buffer);
 }
 
 int max_pressure_release(struct valve *v, size_t n, int start, int curr,
