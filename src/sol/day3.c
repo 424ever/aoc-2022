@@ -19,9 +19,7 @@ void __attribute__((constructor)) day3_init(void)
 		fprintf(stderr, "day3 load failed.\n");
 }
 
-void  day3_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day3_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char   common_char;
 	char  *line;

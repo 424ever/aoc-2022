@@ -28,9 +28,7 @@ void __attribute__((constructor)) day1_init(void)
 		fprintf(stderr, "day1 load failed.\n");
 }
 
-void  day1_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day1_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char		 *line;
 	size_t		  i;
@@ -94,8 +92,7 @@ FILE *debug_out;
 	free(cals_arr);
 }
 
-static size_t	  cals_sum(cals)
-struct day1_cals *cals;
+static size_t cals_sum(struct day1_cals *cals)
 {
 	size_t i;
 	size_t sum;
@@ -108,8 +105,7 @@ struct day1_cals *cals;
 	return sum;
 }
 
-static int  cals_sum_compar(i1, i2) const void *i1;
-const void *i2;
+static int cals_sum_compar(const void *i1, const void *i2)
 {
 	return cals_sum((struct day1_cals *) i1) -
 	       cals_sum((struct day1_cals *) i2);

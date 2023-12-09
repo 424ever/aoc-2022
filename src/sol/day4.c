@@ -3,7 +3,6 @@
  */
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "aoc.h"
 
@@ -25,9 +24,7 @@ void __attribute__((constructor)) day4_init(void)
 		fprintf(stderr, "day4 load failed.\n");
 }
 
-void  day4_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day4_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	size_t	      full_ol_count;
 	size_t	      ol_count;
@@ -50,19 +47,18 @@ FILE *debug_out;
 	fprintf(out_f, "%ld\n%ld\n", full_ol_count, ol_count);
 }
 
-bool overlap(r) struct region r[2];
+bool overlap(struct region r[2])
 {
 	return r[0].l <= r[1].h && r[1].l <= r[0].h;
 }
 
-bool full_overlap(r) struct region r[2];
+bool full_overlap(struct region r[2])
 {
 	return (r[0].l <= r[1].l && r[0].h >= r[1].h) ||
 	       (r[1].l <= r[0].l && r[1].h >= r[0].h);
 }
 
-void	      write_reg(f, r) FILE *f;
-struct region r;
+void write_reg(FILE *f, struct region r)
 {
 	fprintf(f, "reg(%d %d)\n", r.l, r.h);
 }

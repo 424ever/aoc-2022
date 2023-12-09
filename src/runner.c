@@ -20,9 +20,7 @@ static char	      expected_output[OUTPUT_SIZE];
 
 bool register_sol(struct aoc_sol);
 
-int   main(argc, argv)
-int   argc;
-char *argv[];
+int main(int argc, char *argv[])
 {
 	FILE  *debug_out_f;
 	FILE  *in_f;
@@ -179,7 +177,7 @@ out:
 	return ret;
 }
 
-bool register_sol(sol) struct aoc_sol sol;
+bool register_sol(struct aoc_sol sol)
 {
 	size_t i;
 
@@ -197,8 +195,7 @@ bool register_sol(sol) struct aoc_sol sol;
 	return true;
 }
 
-char *rtrim(s)
-char *s;
+char *rtrim(char *s)
 {
 	char *back;
 

@@ -17,9 +17,7 @@ void __attribute__((constructor)) day2_init(void)
 		fprintf(stderr, "day2 load failed.\n");
 }
 
-void  day2_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day2_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char   my_move;
 	char   op_move;

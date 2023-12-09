@@ -41,9 +41,7 @@ void __attribute__((constructor)) day5_init(void)
 		fprintf(stderr, "day5 load failed.\n");
 }
 
-void  day5_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day5_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char	     *crate;
 	char	     *line;
@@ -123,8 +121,7 @@ FILE *debug_out;
 	free(line);
 }
 
-void	    apply_proc_1(s, p) struct stack *s;
-struct proc p;
+void apply_proc_1(struct stack *s, struct proc p)
 {
 	char   c;
 	size_t i;
@@ -136,8 +133,7 @@ struct proc p;
 	}
 }
 
-void	    apply_proc_2(s, p) struct stack *s;
-struct proc p;
+void apply_proc_2(struct stack *s, struct proc p)
 {
 	char   *buf;
 	ssize_t i;
@@ -166,8 +162,7 @@ void stack_add_bottom(struct stack *s, char c)
 	s->crates[s->count - 1] = c;
 }
 
-char	      stack_peek(s)
-struct stack *s;
+char stack_peek(struct stack *s)
 {
 	if (s->count == 0)
 	{
@@ -190,8 +185,7 @@ void stack_push(struct stack *s, char c)
 	s->crates[0] = c;
 }
 
-char	      stack_pop(s)
-struct stack *s;
+char stack_pop(struct stack *s)
 {
 	char c;
 
@@ -208,9 +202,7 @@ struct stack *s;
 	return c;
 }
 
-void	      write_stacks(f, s, n) FILE *f;
-struct stack *s;
-size_t	      n;
+void write_stacks(FILE *f, struct stack *s, size_t n)
 {
 	size_t i, j;
 
@@ -226,9 +218,7 @@ size_t	      n;
 	}
 }
 
-void	     write_procs(f, p, n) FILE *f;
-struct proc *p;
-size_t	     n;
+void write_procs(FILE *f, struct proc *p, size_t n)
 {
 	size_t i;
 

@@ -20,9 +20,7 @@ void __attribute__((constructor)) day6_init(void)
 		fprintf(stderr, "day6 load failed.\n");
 }
 
-void  day6_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void day6_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	(void) debug_out;
 
@@ -31,9 +29,7 @@ FILE *debug_out;
 	fprintf(out_f, "%d\n", find_first_unique_seq(in_f, 14));
 }
 
-int   find_first_unique_seq(f, n)
-FILE *f;
-int   n;
+int find_first_unique_seq(FILE *f, int n)
 {
 	int   i;
 	char  c;
@@ -59,8 +55,7 @@ exit:
 	return i;
 }
 
-bool has_dups(buf, n) char *buf;
-int  n;
+bool has_dups(char *buf, int n)
 {
 	int i, j;
 

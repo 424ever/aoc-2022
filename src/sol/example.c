@@ -18,9 +18,7 @@ void __attribute__((constructor)) example_init(void)
 		fprintf(stderr, "example load failed.\n");
 }
 
-void  example_sol_func(in_f, out_f, debug_out) FILE *in_f;
-FILE *out_f;
-FILE *debug_out;
+void example_sol_func(FILE *in_f, FILE *out_f, FILE *debug_out)
 {
 	char  *line;
 	size_t nread;
