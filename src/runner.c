@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	test_in_f   = NULL;
 	test_mode   = false;
 
-	while ((option = getopt(argc, argv, "dlt")) not_eq -1)
+	while ((option = getopt(argc, argv, "dlt")) not_eq - 1)
 	{
 		switch (option)
 		{
@@ -169,7 +169,8 @@ out:
 		perror("fclose");
 	if (test_in_f and fclose(test_in_f) not_eq 0)
 		perror("fclose");
-	if (debug_out_f not_eq stderr and fclose(debug_out_f) not_eq 0)
+	if (debug_out_f and debug_out_f not_eq stderr and fclose(debug_out_f)
+		not_eq 0)
 		perror("fclose");
 	if (out_f and fclose(out_f) not_eq 0)
 		perror("fclose");

@@ -1,7 +1,7 @@
 SOLDIR  = src/sol
 SRCDIR  = src
 PROG    = aoc-2022
-CFLAGS  = -Wall -Wextra -Werror -I$(SRCDIR) -pedantic-errors -Ofast
+CFLAGS += -Wall -Wextra -Werror -I$(SRCDIR) -pedantic-errors -O3
 
 SOLSRCS = $(wildcard $(SOLDIR)/*.c)
 SOLOBJS = $(patsubst %.c, %.o, $(SOLSRCS))
@@ -31,4 +31,3 @@ $(PROG): $(OBJ)
 %.o: %.c
 	@printf "%b" " \033[0;34mCC\t\033[0;36m$@\033[m\n"
 	@$(CC) -c -o $@ $^ $(CFLAGS)
-
